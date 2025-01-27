@@ -27,8 +27,15 @@ namespace doc_editor.Hubs
                 Console.WriteLine($"server Remove:{change}");
             }
 
+            try
+            {
+                DBhandler.LogUpdate(username, position, change, type);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Something went wrong.");
+            }
 
-            DBhandler.LogUpdate(username, position, change, type);
 
             await Clients.Others.SendAsync("ReceiveDocumentDelta", position, change, type);
         }

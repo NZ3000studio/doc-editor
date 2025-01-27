@@ -29,7 +29,15 @@ namespace doc_editor.Controllers
                 return RedirectToAction("login", "Index");
             }
 
-            DBhandler.LogConnection(username);
+            
+            try
+            {
+                DBhandler.LogConnection(username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Something went wrong.");
+            }
 
             ViewBag.Username = username;
             return View();
